@@ -137,27 +137,27 @@ async function updatePrices() {
   InternalBus.emit(GlobalEvents.converter_price, query);
 }
 
-//EUR price update
-async function updateEURPrice() {
-  let query = {};
-  const EURUSDTBook = await bittrex.orderBook("USDT-EUR");
-  if (EURUSDTBook.bids[1] && EURUSDTBook.asks[1])
-    query[`EUR-USDT`] = {
-      bid: [parseFloat(parseFloat(1 / EURUSDTBook.asks[1].rate).toFixed(8))],
-      ask: [parseFloat(parseFloat(1 / EURUSDTBook.bids[1].rate).toFixed(8))],
-    };
-  InternalBus.emit(GlobalEvents.converter_price, query);
-}
+// //EUR price update
+// async function updateEURPrice() {
+//   let query = {};
+//   const EURUSDTBook = await bittrex.orderBook("USDT-EUR");
+//   if (EURUSDTBook.bids[1] && EURUSDTBook.asks[1])
+//     query[`EUR-USDT`] = {
+//       bid: [parseFloat(parseFloat(1 / EURUSDTBook.asks[1].rate).toFixed(8))],
+//       ask: [parseFloat(parseFloat(1 / EURUSDTBook.bids[1].rate).toFixed(8))],
+//     };
+//   InternalBus.emit(GlobalEvents.converter_price, query);
+// }
 
 updatePrices();
-updateEURPrice();
+// updateEURPrice();
 
 setInterval(async () => {
   updatePrices();
 }, 300000);
 
-setInterval(async () => {
-  updateEURPrice();
-}, 120000);
+// setInterval(async () => {
+//   updateEURPrice();
+// }, 120000);
 
 module.exports = app;

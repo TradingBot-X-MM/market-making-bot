@@ -152,7 +152,9 @@ class Monitor extends React.Component {
       };
     }
 
-    if (updateState !== {}) this.setState({ ...updateState });
+    if (Object.keys(updateState).length > 0) {
+      this.setState({ ...updateState });
+    }
   }
 
   getAverageRate() {

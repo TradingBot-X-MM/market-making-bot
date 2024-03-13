@@ -155,6 +155,7 @@ export const ConnectSocket = function (rooms) {
         query: {
           jwt: GetJwt(),
         },
+        upgrade: false,
       });
 
       newSocket.once("connect", () => {
